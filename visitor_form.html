@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self Visitor Entry</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  body { padding-top: 50px; }
+</style>
+
+</head>
+
+<body class="bg-blue-100 min-h-screen">
+
+<!-- 🔹 NAVBAR -->
+<nav class="w-full bg-[#234997] backdrop-blur-md text-white px-6 py-4 rounded-xl 
+            fixed top-0 left-0 flex justify-between items-center shadow-lg z-50">
+
+  <h1 class="text-lg md:text-xl font-semibold tracking-wide">
+    Visitor Management System
+  </h1>
+
+  <!-- Desktop Menu -->
+  <ul class="hidden md:flex gap-6 text-sm font-medium">
+    <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
+    <li><a href="visitor_form.html" class="hover:text-gray-300">New Visitor</a></li>
+    <li><a href="About.html" class="hover:text-gray-300">About Us</a></li>
+    <li><a href="help.html" class="hover:text-gray-300">Help</a></li>
+  </ul>
+
+  <!-- Mobile Button -->
+  <button onclick="toggleMenu()" class="md:hidden text-3xl">☰</button>
+</nav>
+
+<!-- 🔹 FIXED MOBILE MENU (NO OVERLAP) -->
+<div id="mobileMenu"
+     class="hidden bg-[#234997] text-white backdrop-blur-md mx-4 mt-[78px] 
+     p-5 rounded-xl md:hidden text-center shadow-lg">
+
+  <ul class="flex flex-col gap-5 text-lg">
+    <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
+    <li><a href="visitor_form.html" class="hover:text-gray-300">New Visitor</a></li>
+    <li><a href="About.html" class="hover:text-gray-300">About Us</a></li>
+    <li><a href="help.html" class="hover:text-gray-300">Help</a></li>
+  </ul>
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("mobileMenu").classList.toggle("hidden");
+}
+</script>
+
+
+<!-- MAIN FORM -->
+<div class="bg-white p-6 md:p-10 rounded-2xl shadow-2xl w-full max-w-3xl mx-auto mt-10">
+
+  <h1 class="text-3xl font-bold text-center text-[#234997] mb-6">
+      Self Visitor Registration
+  </h1>
+
+  <p class="text-center text-gray-600 mb-6">Please enter your details</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <div>
+          <label class="font-semibold text-gray-700 text-sm">Full Name</label>
+          <input class="w-full p-3 mt-1 rounded-lg border" type="text" id="vname">
+      </div>
+
+      <div>
+          <label class="font-semibold text-gray-700 text-sm">Phone Number</label>
+          <input class="w-full p-3 mt-1 rounded-lg border" type="text" id="vphone">
+      </div>
+
+      <div>
+          <label class="font-semibold text-gray-700 text-sm">Visit Date</label>
+          <input class="w-full p-3 mt-1 rounded-lg border" type="date" id="vdate">
+      </div>
+
+      <div>
+          <label class="font-semibold text-gray-700 text-sm">In Time</label>
+          <input class="w-full p-3 mt-1 rounded-lg border" type="time" id="vtimein">
+      </div>
+
+      <div>
+          <label class="font-semibold text-gray-700 text-sm">To Meet</label>
+          <input class="w-full p-3 mt-1 rounded-lg border" type="text" id="vmeet">
+      </div>
+
+      <div class="md:col-span-2">
+          <label class="font-semibold text-gray-700 text-sm">Purpose</label>
+          <textarea class="w-full p-3 mt-1 rounded-lg border" id="vpurpose"></textarea>
+      </div>
+
+  </div>
+
+  <button onclick="handleAddVisitor()" 
+      class="mt-6 bg-[#234997] hover:bg-blue-800 text-white w-full p-3 rounded-xl text-lg font-semibold">
+      Submit & Generate My QR
+  </button>
+
+  <p id="msg" class="text-center font-semibold mt-4"></p>
+
+</div>
+
+<!-- QR BOX -->
+<div class="bg-white p-6 rounded-xl shadow-xl mt-10 max-w-md mx-auto text-center">
+  <h3 class="text-lg font-semibold text-blue-800">Your QR Code</h3>
+  <canvas id="qrCanvas" class="mx-auto my-4"></canvas>
+
+  <button onclick="downloadQR()" 
+      class="bg-[#234997] hover:bg-blue-700 text-white px-5 py-2 rounded-lg">
+      Download QR
+  </button>
+</div>
+
+
+<!-- QR SCRIPT -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

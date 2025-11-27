@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .fade {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="bg-[#e8efff] min-h-screen pt-24 px-4">
+
+<!-- 🔹 NAVBAR (Unified Across All Pages) -->
+<nav class="w-full bg-[#234997] text-white px-6 py-4 rounded-xl 
+            fixed top-0 left-0 flex justify-between items-center shadow-lg z-50 fade">
+
+    <h1 class="text-lg md:text-xl font-semibold tracking-wide">
+        Visitor Management System
+    </h1>
+
+    <!-- Desktop Menu -->
+    <ul class="hidden md:flex gap-6 text-sm font-medium">
+        <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
+        <li><a href="visitor_form.html" class="hover:text-gray-300">New Visitor</a></li>
+        <li><a href="About.html" class="hover:text-gray-300">About Us</a></li>
+        <li><a href="help.html" class="hover:text-gray-300">Help</a></li>
+    </ul>
+
+    <!-- Mobile Toggle -->
+    <button onclick="toggleMenu()" class="md:hidden text-3xl">☰</button>
+</nav>
+
+<!-- Mobile Dropdown -->
+<div id="mobileMenu"
+     class="hidden bg-[#234997] text-white backdrop-blur-md mx-4 mt-24 p-4 rounded-xl md:hidden fade text-center">
+
+    <ul class="flex flex-col gap-4 text-lg">
+        <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
+        <li><a href="visitor_form.html" class="hover:text-gray-300">New Visitor</a></li>
+        <li><a href="About.html" class="hover:text-gray-300">About Us</a></li>
+        <li><a href="help.html" class="hover:text-gray-300">Help</a></li>
+    </ul>
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("mobileMenu").classList.toggle("hidden");
+}
+</script>
+
+<!-- HEADER -->
+<header class="flex flex-col md:flex-row justify-between items-start md:items-center 
+              bg-[#234997] text-white p-6 rounded-xl shadow-lg mb-8 mt-6 gap-4 fade">
+
+    <div class="space-y-1">
+        <h1 class="text-2xl md:text-3xl font-bold">Security / Reception Panel</h1>
+        <p class="text-gray-200 text-sm md:text-base">Register new visitors and manage entries</p>
+    </div>
+
+    <div class="flex items-center gap-4 text-sm md:text-base">
+        <span>Logged in as: <strong>Security</strong></span>
+        <button onclick="logout()" 
+                class="bg-red-600 hover:bg-red-700 px-5 py-2 rounded-lg transition shadow-md">
+            Logout
+        </button>
+    </div>
+</header>
+
+
+<!-- MAIN GRID -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 fade">
+
+    <!-- FORM SECTION -->
+    <div class="bg-white p-6 rounded-2xl shadow-xl">
+        <h2 class="text-xl font-semibold mb-4 text-[#234997]">New Visitor Entry</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <div>
+                <label class="font-semibold text-gray-700 text-sm">Visitor Name</label>
+                <input class="w-full p-2 mt-1 rounded-lg border focus:ring-2 focus:ring-blue-500" 
+                       type="text" id="vname" placeholder="Enter full name">
+            </div>
+
+            <div>
+                <label class="font-semibold text-gray-700 text-sm">Phone Number</label>
+                <input class="w-full p-2 mt-1 rounded-lg border focus:ring-2 focus:ring-blue-500" 
+                       type="text" id="vphone" placeholder="Contact number">
+            </div>
+
+            <div>
+                <label class="font-semibold text-gray-700 text-sm">Visit Date</label>
+                <input class="w-full p-2 mt-1 rounded-lg border focus:ring-2 focus:ring-blue-500" type="date" id="vdate">
+            </div>
+
+            <div>
+                <label class="font-semibold text-gray-700 text-sm">In Time</label>
+                <input class="w-full p-2 mt-1 rounded-lg border focus:ring-2 focus:ring-blue-500" type="time" id="vtimein">
+            </div>
+
+            <div>
+                <label class="font-semibold text-gray-700 text-sm">To Meet</label>
+                <input class="w-full p-2 mt-1 rounded-lg border focus:ring-2 focus:ring-blue-500" 
+                       type="text" id="vmeet" placeholder="e.g., HOD CSE">
+            </div>
+
+            <div>
+                <label class="font-semibold text-gray-700 text-sm">Out Time (optional)</label>
+                <input class="w-full p-2 mt-1 rounded-lg border focus:ring-2 focus:ring-blue-500"
+                       type="time" id="vtimeout">
+            </div>
+
+            <div class="md:col-span-2">
+                <label class="font-semibold text-gray-700 text-sm">Purpose</label>
+                <textarea class="w-full p-2 mt-1 rounded-lg border focus:ring-2 focus:ring-blue-500"
+                          id="vpurpose" placeholder="Reason for visit"></textarea>
+            </div>
+
+        </div>
+
+        <button onclick="handleAddVisitor()" 
+                class="mt-6 bg-[#234997] hover:bg-[#1b3b7e] text-white px-5 py-3 rounded-lg w-full transition">
+            Save Visitor Entry
+        </button>
+
+        <p id="sec-msg" class="text-green-600 mt-3"></p>
+    </div>
+
+
+    <!-- VISITOR RECORDS -->
+    <div class="bg-white p-6 rounded-2xl shadow-xl">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+            <h2 class="text-xl font-semibold text-[#234997]">Visitor Records</h2>
+
+            <div class="flex gap-2">
+                <button onclick="renderVisitorsTable('visitor-table-body')" 
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow">
+                    View All
+                </button>
+
+                <button onclick="clearVisitors()" 
+                        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow">
+                    Clear All
+                </button>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-lg border">
+            <table class="min-w-full text-center text-sm">
+                <thead class="bg-[#234997] text-white">
+                    <tr>
+                        <th class="p-3 border">#</th>
+                        <th class="p-3 border">Name</th>
+                        <th class="p-3 border">Contact</th>
+                        <th class="p-3 border">Purpose</th>
+                        <th class="p-3 border">To Meet</th>
+                        <th class="p-3 border">Date</th>
+                        <th class="p-3 border">In</th>
+                        <th class="p-3 border">Out</th>
+                        <th class="p-3 border">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="visitor-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<!-- QR GRID -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 fade">
+
+    <!-- Generated QR -->
+    <div class="bg-white p-6 rounded-2xl shadow-xl text-center">
+        <h3 class="text-lg font-bold text-[#234997]">Generated QR Code</h3>
+        <canvas id="qrCanvas" class="mx-auto my-4"></canvas>
+        <button onclick="downloadQR()" 
+                class="bg-[#234997] hover:bg-[#1b3b7e] text-white px-5 py-2 rounded-lg shadow">
+            Download QR
+        </button>
+    </div>
+
+    <!-- QR Scanner -->
+    <div class="bg-white p-6 rounded-2xl shadow-xl text-center">
+        <h3 class="text-lg font-bold text-[#234997]">Scan Visitor QR Code</h3>
+        <div id="reader" class="mx-auto my-4" style="width: 280px;"></div>
+
+        <button onclick="startScanner()" 
+                class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow">
+            Start Scanner
+        </button>
+    </div>
+
+</div>
+
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

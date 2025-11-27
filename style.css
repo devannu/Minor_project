@@ -1,0 +1,115 @@
+body{
+    background:#eef2ff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:Arial, sans-serif;
+}
+
+.login-box{
+    background:white;
+    padding:25px;
+    width:300px;
+    border-radius:10px;
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+input, select{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#4A5CF1;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#3546d1;
+}
+/* style */
+/* GLOBAL PAGE DESIGN */
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(135deg, #234997, #102c62);
+}
+
+/* BUTTON CUSTOM HOVER EFFECT */
+button {
+    transition: transform 0.2s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.03);
+}
+
+/* CARDS */
+.bg-white {
+    border: 1px solid #d6dffc;
+    transition: box-shadow 0.3s;
+}
+
+.bg-white:hover {
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* TABLE STYLING */
+table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+thead tr {
+    border-bottom: 3px solid #1b3b7e;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f3f6ff;
+}
+
+/* ADD HOVER EFFECT ON ROWS */
+tbody tr:hover {
+    background-color: #dce5ff;
+    transition: 0.3s;
+}
+
+/* INPUT & TEXTAREA CUSTOM BORDER */
+input, textarea {
+    border: 2px solid #d5ddf7 !important;
+}
+
+input:focus, textarea:focus {
+    border-color: #234997 !important;
+}
+
+/* QR Section */
+#qrCanvas {
+    border: 3px dashed #234997;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+/* RESPONSIVE IMPROVEMENTS */
+@media (max-width: 768px) {
+    header {
+        text-align: center;
+    }
+
+    table {
+        font-size: 12px;
+    }
+}
