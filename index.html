@@ -7,7 +7,6 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Custom Animations -->
   <style>
     @keyframes fadeInSmooth {
       from { opacity: 0; transform: translateY(20px); }
@@ -20,55 +19,71 @@
       transform: translateY(-2px);
       transition: 0.25s ease-in-out;
     }
+
+    /* SLOW RAILWAY MARQUEE */
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .animate-marquee {
+      display: inline-block;
+      animation: marquee 20s linear infinite; /* slow smooth speed */
+    }
   </style>
 </head>
 
 <body class="bg-[#234997] min-h-screen">
 
-  <!-- 🔹 Responsive NAVBAR -->
+  <!-- NAVBAR -->
   <nav class="w-full bg-[#234997] backdrop-blur-md text-white px-6 py-4 rounded-xl 
               fixed top-0 left-0 flex justify-between items-center shadow-lg z-50 fade-in">
 
-    <!-- LOGO -->
     <h1 class="text-xl font-semibold tracking-wide">
       Visitor Management System
     </h1>
 
-    <!-- DESKTOP MENU -->
     <ul class="hidden md:flex gap-6 text-sm font-medium">
       <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
       <li><a href="visitor_form.html" class="hover:text-gray-300">New Visitor</a></li>
+        <li><a href="QR.html" class="hover:text-gray-300">QR Scan</a></li>
+
       <li><a href="About.html" class="hover:text-gray-300">About Us</a></li>
       <li><a href="help.html" class="hover:text-gray-300">Help</a></li>
     </ul>
 
-    <!-- MOBILE MENU BUTTON -->
-    <button onclick="toggleMenu()" class="md:hidden text-3xl">
-      ☰
-    </button>
+    <button onclick="toggleMenu()" class="md:hidden text-3xl">☰</button>
   </nav>
 
-  <!-- 🔹 MOBILE MENU -->
+  <!-- MOBILE MENU -->
   <div id="mobileMenu"
        class="hidden bg-white/10 text-white backdrop-blur-md py-5 px-6 rounded-xl 
               md:hidden mx-4 mt-24 fade-in">
-
     <ul class="flex flex-col gap-4 text-center text-lg">
       <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
       <li><a href="visitor_form.html" class="hover:text-gray-300">New Visitor</a></li>
+        <li><a href="QR.html" class="hover:text-gray-300">QR Scan</a></li>
+
       <li><a href="About.html" class="hover:text-gray-300">About Us</a></li>
       <li><a href="help.html" class="hover:text-gray-300">Help</a></li>
     </ul>
   </div>
 
-  <!-- 🔸 LOGIN BOX -->
-  <div class="flex items-center justify-center min-h-screen px-5 fade-in pt-32">
+  <!-- FIXED MARQUEE CLOCK (Correct Spacing) -->
+  <div class="w-full text-center mt-24 px-6">
+    <div class="overflow-hidden bg-[#234997] backdrop-blur-md py-2 rounded-xl ">
+      <div id="marqueeClock" class="text-white text-lg font-semibold whitespace-nowrap animate-marquee">
+        Loading Time...
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGIN BOX (Now perfectly centered) -->
+  <div class="flex items-center justify-center min-h-[70vh] px-5 fade-in">
 
     <div class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-sm text-center hover-glow">
 
-      <h2 class="text-2xl font-bold mb-6 tracking-wide text-[#234997]">
-        Welcome Back
-      </h2>
+      <h2 class="text-2xl font-bold mb-6 tracking-wide text-[#234997]">Welcome Back</h2>
 
       <select id="role"
         class="w-full mb-4 p-3 border border-gray-300 rounded-lg 
@@ -92,15 +107,35 @@
       </button>
 
       <p id="msg" class="text-center mt-4 text-red-600 font-medium"></p>
+
     </div>
   </div>
 
+  <!-- TOGGLE MENU SCRIPT -->
   <script>
     function toggleMenu() {
       document.getElementById("mobileMenu").classList.toggle("hidden");
     }
   </script>
 
+  <!-- MARQUEE CLOCK SCRIPT -->
+  <script>
+    function updateMarqueeClock() {
+      const now = new Date();
+      let hrs = now.getHours().toString().padStart(2, "0");
+      let mins = now.getMinutes().toString().padStart(2, "0");
+      let secs = now.getSeconds().toString().padStart(2, "0");
+
+      let timeString = `⏱️  Current Time: ${hrs}:${mins}:${secs}   |   Welcome to Visitor Management System`;
+
+      document.getElementById("marqueeClock").innerText = timeString;
+    }
+
+    setInterval(updateMarqueeClock, 1000);
+    updateMarqueeClock();
+  </script>
+
   <script src="script.js"></script>
+
 </body>
 </html>
