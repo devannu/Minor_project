@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Scanner - Visitor Management System</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .fade { animation: fadeIn .5s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="bg-[#e8efff] min-h-screen pt-24 px-4">
+
+<!-- NAVBAR (same as all pages) -->
+<nav class="w-full bg-[#234997] text-white px-6 py-4 rounded-xl 
+            fixed top-0 left-0 flex justify-between items-center shadow-lg z-50 fade">
+
+    <h1 class="text-lg md:text-xl font-semibold tracking-wide">
+        Visitor Management System
+    </h1>
+
+     <!-- Desktop Menu -->
+    <ul class="hidden md:flex gap-6 text-sm font-medium">
+        <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
+        <li><a href="visitor_form.html" class="hover:text-gray-300">New Visitor</a></li>
+        <li><a href="QR.html" class="hover:text-gray-300">QR Scan</a></li>
+        <li><a href="About.html" class="hover:text-gray-300">About Us</a></li>
+        <li><a href="help.html" class="hover:text-gray-300">Help</a></li>
+    </ul>
+
+    <!-- Mobile Toggle -->
+    <button onclick="toggleMenu()" class="md:hidden text-3xl">☰</button>
+</nav>
+
+<!-- Mobile Dropdown -->
+<div id="mobileMenu"
+     class="hidden bg-[#234997] text-white backdrop-blur-md mx-4 mt-24 p-4 rounded-xl md:hidden fade text-center">
+
+    <ul class="flex flex-col gap-4 text-lg">
+        <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
+        <li><a href="visitor_form.html" class="hover:text-gray-300">New Visitor</a></li>
+        <li><a href="QR.html" class="hover:text-gray-300">QR Scan</a></li>
+
+        <li><a href="About.html" class="hover:text-gray-300">About Us</a></li>
+        <li><a href="help.html" class="hover:text-gray-300">Help</a></li>
+    </ul>
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("mobileMenu").classList.toggle("hidden");
+}
+</script>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-lg mx-auto mt-10 bg-white p-6 rounded-2xl shadow-xl text-center fade">
+    <h2 class="text-2xl font-bold text-[#234997] mb-4">Scan Visitor QR Code</h2>
+
+    <p class="text-gray-700 mb-4">
+        Hold the QR code in front of the camera to mark Entry/Exit automatically.
+    </p>
+
+    <div id="reader" class="mx-auto" style="width: 300px;"></div>
+
+    <button onclick="startScanner()" 
+            class="mt-6 bg-[#234997] hover:bg-[#1b3b7e] text-white px-5 py-3 rounded-lg shadow">
+        Start Scanner
+    </button>
+
+    <p id="scan-status" class="mt-4 text-green-600 font-semibold"></p>
+</div>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script src="script.js"></script>
+
+<script>
+function startScanner() {
+    document.getElementById("scan-status").innerHTML = "📷 Scanner started...";
+
+    const qr = new Html5Qrcode("reader");
+
+    qr.start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: 250 },
+
+        (decoded) => {
+            qr.stop();
+            document.getElementById("scan-status").innerHTML =
+                "✔ QR Scanned Successfully! Updating Record...";
+
+            let visitor = JSON.parse(decoded);
+
+            // Use your existing function from script.js
+            updateVisitorFromQR(visitor);
+
+            setTimeout(() => {
+                document.getElementById("scan-status").innerHTML = "";
+            }, 3000);
+        },
+
+        (error) => { /* ignore failed scans */ }
+    );
+}
+</script>
+
+</body>
+</html>
