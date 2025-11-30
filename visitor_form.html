@@ -27,6 +27,8 @@
   <ul class="hidden md:flex gap-6 text-sm font-medium">
     <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
     <li><a href="visitor_form.html" class="hover:text-gray-300">New Visitor</a></li>
+        <li><a href="QR.html" class="hover:text-gray-300">QR Scan</a></li>
+
     <li><a href="About.html" class="hover:text-gray-300">About Us</a></li>
     <li><a href="help.html" class="hover:text-gray-300">Help</a></li>
   </ul>
@@ -43,6 +45,8 @@
   <ul class="flex flex-col gap-5 text-lg">
     <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
     <li><a href="visitor_form.html" class="hover:text-gray-300">New Visitor</a></li>
+        <li><a href="QR.html" class="hover:text-gray-300">QR Scan</a></li>
+
     <li><a href="About.html" class="hover:text-gray-300">About Us</a></li>
     <li><a href="help.html" class="hover:text-gray-300">Help</a></li>
   </ul>
@@ -55,7 +59,7 @@ function toggleMenu() {
 </script>
 
 
-<!-- MAIN FORM -->
+<!-- MAIN FORM -->l
 <div class="bg-white p-6 md:p-10 rounded-2xl shadow-2xl w-full max-w-3xl mx-auto mt-10">
 
   <h1 class="text-3xl font-bold text-center text-[#234997] mb-6">
@@ -64,39 +68,51 @@ function toggleMenu() {
 
   <p class="text-center text-gray-600 mb-6">Please enter your details</p>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+   <!-- FORM SECTION -->
+<div class="bg-white p-6 rounded-2xl shadow-xl">
+    <h2 class="text-xl font-semibold mb-4 text-[#234997]">New Visitor Entry</h2>
 
-      <div>
-          <label class="font-semibold text-gray-700 text-sm">Full Name</label>
-          <input class="w-full p-3 mt-1 rounded-lg border" type="text" id="vname">
-      </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-      <div>
-          <label class="font-semibold text-gray-700 text-sm">Phone Number</label>
-          <input class="w-full p-3 mt-1 rounded-lg border" type="text" id="vphone">
-      </div>
+        <div>
+            <label class="font-semibold text-gray-700 text-sm">Visitor Name</label>
+            <input class="w-full p-2 mt-1 rounded-lg border focus:ring-2 focus:ring-blue-500" 
+                   type="text" id="vname" placeholder="Enter full name">
+        </div>
 
-      <div>
-          <label class="font-semibold text-gray-700 text-sm">Visit Date</label>
-          <input class="w-full p-3 mt-1 rounded-lg border" type="date" id="vdate">
-      </div>
+       <div>
+    <label class="font-semibold text-gray-700 text-sm">Phone Number</label>
+    <input 
+        class="w-full p-2 mt-1 rounded-lg border focus:ring-2 focus:ring-blue-500" 
+        type="text" 
+        id="vphone" 
+        placeholder="Enter 10 digit mobile number"
+        maxlength="10"
+        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+    >
+</div>
 
-      <div>
-          <label class="font-semibold text-gray-700 text-sm">In Time</label>
-          <input class="w-full p-3 mt-1 rounded-lg border" type="time" id="vtimein">
-      </div>
 
-      <div>
-          <label class="font-semibold text-gray-700 text-sm">To Meet</label>
-          <input class="w-full p-3 mt-1 rounded-lg border" type="text" id="vmeet">
-      </div>
+        <div>
+            <label class="font-semibold text-gray-700 text-sm">Visit Date</label>
+            <input class="w-full p-2 mt-1 rounded-lg border focus:ring-2 focus:ring-blue-500" 
+                   type="date" id="vdate">
+        </div>
 
-      <div class="md:col-span-2">
-          <label class="font-semibold text-gray-700 text-sm">Purpose</label>
-          <textarea class="w-full p-3 mt-1 rounded-lg border" id="vpurpose"></textarea>
-      </div>
+        <div>
+            <label class="font-semibold text-gray-700 text-sm">To Meet</label>
+            <input class="w-full p-2 mt-1 rounded-lg border focus:ring-2 focus:ring-blue-500" 
+                   type="text" id="vmeet" placeholder="e.g., HOD CSE">
+        </div>
 
-  </div>
+        <div class="md:col-span-2">
+            <label class="font-semibold text-gray-700 text-sm">Purpose</label>
+            <textarea class="w-full p-2 mt-1 rounded-lg border focus:ring-2 focus:ring-blue-500"
+                      id="vpurpose" placeholder="Reason for visit"></textarea>
+        </div>
+
+    </div>
+
 
   <button onclick="handleAddVisitor()" 
       class="mt-6 bg-[#234997] hover:bg-blue-800 text-white w-full p-3 rounded-xl text-lg font-semibold">
