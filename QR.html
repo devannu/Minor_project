@@ -16,18 +16,18 @@
     </style>
 </head>
 
-<body class="bg-[#e8efff] min-h-screen pt-24 px-4">
+<body class="bg-[#e8efff] min-h-screen flex flex-col pt-24 px-4">
 
-<!-- NAVBAR (same as all pages) -->
+<!-- NAVBAR -->
 <nav class="w-full bg-[#234997] text-white px-6 py-4 rounded-xl 
             fixed top-0 left-0 flex justify-between items-center shadow-lg z-50 fade">
 
-    <h1 class="text-lg md:text-xl font-semibold tracking-wide">
+    <h1 class="text-lg md:text-3xl font-semibold tracking-wide">
         Visitor Management System
     </h1>
 
-     <!-- Desktop Menu -->
-    <ul class="hidden md:flex gap-6 text-sm font-medium">
+    <!-- Desktop Menu -->
+    <ul class="hidden md:flex gap-6 text-lg font-medium">
         <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
         <li><a href="visitor_form.html" class="hover:text-gray-300">New Visitor</a></li>
         <li><a href="QR.html" class="hover:text-gray-300">QR Scan</a></li>
@@ -47,7 +47,6 @@
         <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
         <li><a href="visitor_form.html" class="hover:text-gray-300">New Visitor</a></li>
         <li><a href="QR.html" class="hover:text-gray-300">QR Scan</a></li>
-
         <li><a href="About.html" class="hover:text-gray-300">About Us</a></li>
         <li><a href="help.html" class="hover:text-gray-300">Help</a></li>
     </ul>
@@ -60,7 +59,7 @@ function toggleMenu() {
 </script>
 
 <!-- MAIN CONTENT -->
-<div class="max-w-lg mx-auto mt-10 bg-white p-6 rounded-2xl shadow-xl text-center fade">
+<div class="max-w-lg mx-auto mt-10 bg-white p-6 rounded-2xl shadow-xl text-center fade flex-grow">
     <h2 class="text-2xl font-bold text-[#234997] mb-4">Scan Visitor QR Code</h2>
 
     <p class="text-gray-700 mb-4">
@@ -77,13 +76,21 @@ function toggleMenu() {
     <p id="scan-status" class="mt-4 text-green-600 font-semibold"></p>
 </div>
 
+<!-- FOOTER -->
+<footer class="w-full bg-[#234997] text-white py-5 mt-12 
+        text-center rounded-t-2xl shadow-lg">
+    <p class="text-sm sm:text-base tracking-wide">
+        © 2025 Visitor Management System Project Team
+    </p>
+</footer>
+
 <!-- Scripts -->
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script src="script.js"></script>
 
 <script>
 function startScanner() {
-    document.getElementById("scan-status").innerHTML = "📷 Scanner started...";
+    document.getElementById("scan-status").innerHTML = " Scanner started...";
 
     const qr = new Html5Qrcode("reader");
 
@@ -94,11 +101,11 @@ function startScanner() {
         (decoded) => {
             qr.stop();
             document.getElementById("scan-status").innerHTML =
-                "✔ QR Scanned Successfully! Updating Record...";
+                " QR Scanned Successfully! Updating Record...";
 
             let visitor = JSON.parse(decoded);
 
-            // Use your existing function from script.js
+            // Call your existing update function
             updateVisitorFromQR(visitor);
 
             setTimeout(() => {
